@@ -28,7 +28,7 @@ dependencies {
 }
 ```
 
-4. 调用
+## 调用
 
      PermissionTool.hasPermissions 用于检查是否拥有权限
      
