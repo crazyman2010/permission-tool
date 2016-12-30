@@ -1,0 +1,7 @@
+<resources>
+    <string name="params_error">The params is not correct!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="can_not_request_permission">These permissions can not request</string>
+    <string name="open_permission_in_settings">OPEN PERMISSION IN SETTINGS</string>
+</resources>
