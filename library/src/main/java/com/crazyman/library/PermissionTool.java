@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -42,6 +43,12 @@ public class PermissionTool extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            //小于6.0,不需要动态申请权限
+            notifyOk();
+            return;
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -185,12 +192,13 @@ public class PermissionTool extends AppCompatActivity {
 
     /**
      * 申请权限
-     * @param activity  从Activity中申请
-     * @param permissions 需要申请的权限数组
-     * @param tips 权限描述数组，必须和permissions一一对应
-     * @param requestCode startActivityForResult中的请求码
      *
-     * 调用后请在onActivityResult中接收结果， Activity.RESULT_OK为成功，Activity.RESULT_CANCEL为失败
+     * @param activity    从Activity中申请
+     * @param permissions 需要申请的权限数组
+     * @param tips        权限描述数组，必须和permissions一一对应
+     * @param requestCode startActivityForResult中的请求码
+     *                    <p>
+     *                    调用后请在onActivityResult中接收结果， Activity.RESULT_OK为成功，Activity.RESULT_CANCEL为失败
      */
     public static void requestPermission(Activity activity, String[] permissions, String[] tips, int requestCode) {
         Intent intent = new Intent(activity, PermissionTool.class);
@@ -201,12 +209,13 @@ public class PermissionTool extends AppCompatActivity {
 
     /**
      * 申请权限
-     * @param fragment  从Fragment中申请
-     * @param permissions 需要申请的权限数组
-     * @param tips 权限描述数组，必须和permissions一一对应
-     * @param requestCode startActivityForResult中的请求码
      *
-     * 调用后请在onActivityResult中接收结果， Activity.RESULT_OK为成功，Activity.RESULT_CANCEL为失败
+     * @param fragment    从Fragment中申请
+     * @param permissions 需要申请的权限数组
+     * @param tips        权限描述数组，必须和permissions一一对应
+     * @param requestCode startActivityForResult中的请求码
+     *                    <p>
+     *                    调用后请在onActivityResult中接收结果， Activity.RESULT_OK为成功，Activity.RESULT_CANCEL为失败
      */
     public static void requestPermission(Fragment fragment, String[] permissions, String[] tips, int requestCode) {
         Intent intent = new Intent(fragment.getContext(), PermissionTool.class);
